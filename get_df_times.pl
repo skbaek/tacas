@@ -13,10 +13,10 @@ get_df_time(NUM) :-
   format(string(CMD), "~w -q -t 20000 ~w~w.cnf temp.frat --lrat=true", [HACK, CNF, NAME]),
   (
     goal_time(shell(CMD, 20), TIME) ->
-    add_entry('df_time.pl', num_df_time(NUM, passed(TIME))),
+    add_entry('df_times.pl', num_df_time(NUM, passed(TIME))),
     format_shell("cp temp.frat frats/~w.frat", [NAME], 0)
   ;
-    add_entry('df_time.pl', num_df_time(NUM, failed))
+    add_entry('df_times.pl', num_df_time(NUM, failed))
   ),
   shell("rm temp.frat", 0).
 
