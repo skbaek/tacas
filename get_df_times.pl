@@ -1,8 +1,7 @@
 #!/usr/bin/env swipl
 
 :- initialization(main, main).
-:- ['/home/sk/prelude']. 
-:- [problems, df_times, paths].
+:- [prelude, problems, df_times, paths].
 
 result_exists(NUM) :- num_df_time(NUM, _), !.
 
