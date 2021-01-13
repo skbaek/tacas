@@ -10,7 +10,7 @@ get_df_time(NUM) :-
   format("Solving problem = ~w with Hackdical...", [NAME]),
   hackdical(HACK), 
   cnf(CNF), 
-  format(string(CMD), "~w -q -t 20000 ~w~w.cnf temp.frat --lrat=true", [HACK, CNF, NAME]),
+  format(string(CMD), "~w -t 20000 ~w~w.cnf temp.frat --lrat=true", [HACK, CNF, NAME]),
   (
     goal_time(shell(CMD, 20), TIME) ->
     add_entry('df_times.pl', num_df_time(NUM, passed(TIME))),
