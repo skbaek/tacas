@@ -195,3 +195,22 @@ add_entry(FILE, ENTRY) :-
   open(FILE, append, STM),
   write_term_punct(STM, ENTRY),
   close(STM).
+
+read_item_core(Goal, Stream, Item) :- 
+  read_line_to_string(Stream, String), 
+  (
+    String = end_of_file -> 
+    (
+      write("Read item fail, EOF\n"),
+      false
+    ) ; 
+    (
+      call(Goal, String, Item) ; 
+      read_item_core(Goal, Stream, Item)
+    )
+  ).
+
+read_item(Goal, File, Time) :- 
+  open(File, read, Stream), 
+  read_item_core(Goal, Stream, Time),
+  close(Stream).
