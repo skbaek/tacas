@@ -1,6 +1,12 @@
 paths.pl
 frats/
+lrats/
 temp.frat
 df_times.pl
 missings.pl
 frat_sizes.pl
+fl_times.pl
+fl_mems.pl
+temp_sizes.pl
+lf_sizes.pl
+lf_check_times.pl
