@@ -214,3 +214,9 @@ read_item(Goal, File, Time) :-
   open(File, read, Stream), 
   read_item_core(Goal, Stream, Time),
   close(Stream).
+
+select_nums(_, ['range', BGN, END], NUMS) :- range(BGN, END, NUMS).
+select_nums(_, ['manual' | ATOMS], NUMS) :- cmap(atom_number, ATOMS, NUMS).
+select_nums(CHECK_EXISTS, ['untested'], NUMS) :- 
+  range(1, 97, RANGE),
+  exclude(CHECK_EXISTS, RANGE, NUMS).
