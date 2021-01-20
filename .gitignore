@@ -1,14 +1,2 @@
-bak/
 frats/
-frats_send/
 lrats/
-
-cnf_to_frat_times.pl
-frat_sizes.pl
-
-frat_to_lrat_times.pl
-frat_to_lrat_mems.pl
-temp_sizes.pl
-lrat_from_frat_sizes.pl
-
-lrat_from_frat_check_times.pl
