@@ -8,7 +8,7 @@ result_exists(NUM) :- cnf_to_frat_time(NUM, _), !.
 test_cnf_to_frat(NUM) :- 
   num_name(NUM, NAME),
   format(string(TEMP), "~w.temp", [NAME]),
-  format(string(FRAT), "./frats/~w.frat", [NAME]),
+  format(string(FRAT), "$FRATS/~w.frat", [NAME]),
   format("Solving problem = ~w with Hackdical...\n", [NAME]),
   format(string(CMD), "cadical -q -t 20000 $CNF/~w.cnf ~w --lrat=true", [NAME, TEMP]),
   (
