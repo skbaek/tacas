@@ -16,13 +16,13 @@ test_cnf_to_frat(NUM) :-
     size_file(TEMP, SIZE), 
     add_entry('frat_sizes.pl', frat_size(NUM, SIZE)),
     add_entry('cnf_to_frat_times.pl', cnf_to_frat_time(NUM, TIME)),
-    format_shell("cp ~w ~w", [TEMP, FRAT], 0),
+    format_shell("mv ~w ~w", [TEMP, FRAT], 0),
     format_shell("pigz ~w", [FRAT], 0)
   ;
+    format_shell("rm ~w", [TEMP], 0),
     add_entry('frat_sizes.pl', frat_size(NUM, failed)),
     add_entry('cnf_to_frat_times.pl', cnf_to_frat_time(NUM, failed))
-  ),
-  format_shell("rm ~w", [TEMP], 0).
+  ).
 
 main(ARGS) :-
   select_nums(result_exists, ARGS, NUMS),
