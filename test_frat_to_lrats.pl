@@ -16,17 +16,21 @@ s_to_ms(S, MS) :- MS is round(S * 1000).
 test_frat_to_lrat(NUM) :- 
   num_name(NUM, NAME),
   format("Processing problem = ~w\n", [NAME]),
-  format(string(FRAT), "./frats/~w.frat", [NAME]),
+  format(string(ALIAS_FRAT), "$FRATS/~w.frat", [NAME]),
+  expand_file_name(ALIAS_FRAT, [FRAT]),
+
   format(string(FRAT_ZIP), "~w.gz", [FRAT]),
   format(string(TARF), "~w.temp", [FRAT]),
-  format(string(LRAT), "./lrats/~w.lrat", [NAME]), !,
+  format(string(LRAT), "$LRATS/~w.lrat", [NAME]), !,
   format(string(LRAT_TEMP), "./~w.lrat", [NAME]), !,
 
+  write("Decompressing FRAT...\n"),
   format_shell("pigz -kd ~w", [FRAT_ZIP], 0), !,
 
   % FRAT_ZIP, FRAT 
 
-  format_shell("time -v $FRAT/target/release/frat-rs elab $CNF/~w.cnf ~w ~w 1>> stdout.txt 2> measure", [NAME, FRAT, LRAT_TEMP], 0), !,
+  write("Elaborating...\n"),
+  format_shell("time -v frat-rs elab $CNF/~w.cnf ~w ~w 1>> stdout.txt 2> measure", [NAME, FRAT, LRAT_TEMP], 0), !,
 
   % FRAT_ZIP, FRAT, TARF, LRAT_TEMP, stdout.txt, measure
 
@@ -36,14 +40,16 @@ test_frat_to_lrat(NUM) :-
   size_file(TARF, TARF_SIZE), 
   size_file(LRAT_TEMP, LRAT_SIZE), !, 
 
-  add_entry('frat_to_lrat_times.pl',   frat_to_lrat_time(NUM, TIME)),
-  add_entry('frat_to_lrat_mems.pl',    frat_to_lrat_mem(NUM, MEM)),
-  add_entry('temp_sizes.pl',           temp_size(NUM, TARF_SIZE)),
-  add_entry('lrat_from_frat_sizes.pl', lrat_from_frat_size(NUM, LRAT_SIZE)), !,
+  add_entry('new_frat_to_lrat_times.pl',   frat_to_lrat_time(NUM, TIME)),
+  add_entry('new_frat_to_lrat_mems.pl',    frat_to_lrat_mem(NUM, MEM)),
+  add_entry('new_temp_sizes.pl',           temp_size(NUM, TARF_SIZE)),
+  add_entry('new_lrat_from_frat_sizes.pl', lrat_from_frat_size(NUM, LRAT_SIZE)), !,
 
   delete_file("measure"),
   delete_file("stdout.txt"),
   format_shell("mv ~w ~w", [LRAT_TEMP, LRAT], 0), !,
+
+  write("Compressing LRAT...\n"),
   format_shell("pigz ~w", [LRAT], 0), !,
 
   % FRAT_ZIP, FRAT, TARF, LRAT_ZIP
@@ -56,10 +62,10 @@ test_frat_to_lrat(NUM) :-
   true.
   
 test_frat_to_lrat(_) :- 
-  add_entry('frat_to_lrat_times.pl',   failed),
-  add_entry('frat_to_lrat_mems.pl',    failed),
-  add_entry('temp_sizes.pl',           failed),
-  add_entry('lrat_from_frat_sizes.pl', failed).
+  add_entry('new_frat_to_lrat_times.pl',   failed),
+  add_entry('new_frat_to_lrat_mems.pl',    failed),
+  add_entry('new_temp_sizes.pl',           failed),
+  add_entry('new_lrat_from_frat_sizes.pl', failed).
 
 result_exists(NUM) :- frat_to_lrat_time(NUM, _), !.
 
