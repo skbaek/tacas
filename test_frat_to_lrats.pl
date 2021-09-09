@@ -49,13 +49,15 @@ test_frat_to_lrat(NUM) :-
   delete_file("stdout.txt"),
   format_shell("mv ~w ~w", [LRAT_TEMP, LRAT], 0), !,
 
-  write("Compressing LRAT...\n"),
-  format_shell("pigz ~w", [LRAT], 0), !,
+  % FRAT_ZIP, FRAT, TARF, LRAT
 
-  % FRAT_ZIP, FRAT, TARF, LRAT_ZIP
-  
   delete_file(FRAT),
   delete_file(TARF),
+
+  % FRAT_ZIP, LRAT
+
+  write("Compressing LRAT...\n"),
+  format_shell("pigz ~w", [LRAT], 0), !,
 
   % FRAT_ZIP, LRAT_ZIP
 
