@@ -31,9 +31,9 @@ test_dpr_trim(NAME) :-
   read_item(read_mem, "measure", MEM),
   size_file(LPR_TEMP, LPR_SIZE), !, 
 
-  add_entry('dpr-trim-times.pl',     dpr_trim_time(NAME, TIME)),
-  add_entry('dpr-trim-mems.pl',      dpr_trim_mem(NAME, MEM)),
-  add_entry('lpr-sizes.pl', dpr_trim_lpr_size(NAME, LPR_SIZE)), !,
+  add_entry('dpr-trim-times.pl', dpr_trim_time(NAME, TIME)),
+  add_entry('dpr-trim-mems.pl',  dpr_trim_mem(NAME, MEM)),
+  add_entry('lpr-sizes.pl', lpr_size(NAME, LPR_SIZE)), !,
 
   delete_file("measure"),
   delete_file("stdout.txt"),
