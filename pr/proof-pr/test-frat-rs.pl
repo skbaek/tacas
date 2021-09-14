@@ -1,6 +1,6 @@
 #!/usr/bin/env swipl
 
-:- ['../../basic', names].
+:- ['../basic', names].
 :- initialization(main, main).
 
 read_time(String, Time) :- 
@@ -26,7 +26,7 @@ test_frat_rs(NAME) :-
   format(string(FRAT_STORE), "./frats/~w.frat", [NAME]), !,
 
   write("Converting PR to FRAT...\n"),
-  format_shell("time -v frat-rs from-drat ~w ~w ~w 1>> stdout.txt 2> measure", [CNF, PR, FRAT], 0), !,
+  format_shell("time -v frat-rs drat-trim -F ~w ~w ~w 1>> stdout.txt 2> measure", [CNF, PR, FRAT], 0), !,
 
   % FRAT, stdout.txt, measure
 
@@ -51,14 +51,14 @@ test_frat_rs(NAME) :-
   delete_file("measure"),
   delete_file("stdout.txt"),
 
-  add_entry('conv-times.pl', conv_time(NAME, CONV_TIME)),
-  add_entry('conv-mems.pl',  conv_mem(NAME, CONV_MEM)),
-  add_entry('frat-sizes.pl', frat_size(NAME, FRAT_SIZE)), !,
+  add_entry('conv_times.pl', conv_time(NAME, CONV_TIME)),
+  add_entry('conv_mems.pl',  conv_mem(NAME, CONV_MEM)),
+  add_entry('frat_sizes.pl', frat_size(NAME, FRAT_SIZE)), !,
 
-  add_entry('elab-times.pl', elab_time(NAME, ELAB_TIME)),
-  add_entry('elab-mems.pl',  elab_mem(NAME, ELAB_MEM)),
-  add_entry('temp-sizes.pl', temp_size(NAME, TEMP_SIZE)),
-  add_entry('lrat-sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
+  add_entry('elab_times.pl', elab_time(NAME, ELAB_TIME)),
+  add_entry('elab_mems.pl',  elab_mem(NAME, ELAB_MEM)),
+  add_entry('temp_sizes.pl', temp_size(NAME, TEMP_SIZE)),
+  add_entry('lrat_sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
 
   format_shell("mv ~w ~w", [LRAT, LRAT_STORE], 0), !,
   format_shell("mv ~w ~w", [FRAT, FRAT_STORE], 0), !,
@@ -75,6 +75,12 @@ test_frat_rs(NAME) :-
   add_entry('temp-sizes.pl',  failed(NAME)),
   add_entry('lrat-sizes.pl',  failed(NAME)),
   true.
+
+% main(ARGS) :-
+%   select_nums(result_exists, ARGS, NUMS),
+%   write_list(NUMS), !,
+%   cmap(test_frat_to_lrat, NUMS).
+
 
 main :- 
   findall(NAME, name(NAME), NAMES),
