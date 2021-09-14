@@ -1,1 +1,20 @@
 
+conv_mem("T5",2996).
+conv_mem("T7",2844).
+conv_mem("Urquhart-s5-b1.shuffled",2832).
+conv_mem("Urquhart-s5-b2.shuffled",3192).
+conv_mem("Urquhart-s5-b3.shuffled",3260).
+conv_mem("Urquhart-s5-b4.shuffled",3152).
+conv_mem("hole20",3880).
+conv_mem("hole30",6700).
+conv_mem("hole40",11680).
+conv_mem("hole50",20292).
+conv_mem("mchess-10",3172).
+conv_mem("mchess-20",5540).
+conv_mem("mchess-30",14584).
+conv_mem("mchess-40",31588).
+conv_mem("mchess-50",53868).
+conv_mem("tph8",3588).
+conv_mem("tph12",10060).
+conv_mem("tph16",20412).
+conv_mem("tph20",61968).

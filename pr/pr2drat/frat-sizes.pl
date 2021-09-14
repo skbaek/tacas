@@ -1,1 +1,20 @@
 
+frat_size("T5",828).
+frat_size("T7",1102).
+frat_size("Urquhart-s5-b1.shuffled",29624).
+frat_size("Urquhart-s5-b2.shuffled",31266).
+frat_size("Urquhart-s5-b3.shuffled",43968).
+frat_size("Urquhart-s5-b4.shuffled",35523).
+frat_size("hole20",130033).
+frat_size("hole30",454755).
+frat_size("hole40",1120335).
+frat_size("hole50",2213695).
+frat_size("mchess-10",36001).
+frat_size("mchess-20",390152).
+frat_size("mchess-30",1605845).
+frat_size("mchess-40",4526902).
+frat_size("mchess-50",10420319).
+frat_size("tph8",113383).
+frat_size("tph12",622023).
+frat_size("tph16",2028191).
+frat_size("tph20",4963529).
