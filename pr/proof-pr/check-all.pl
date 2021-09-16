@@ -3,20 +3,21 @@
 :- ['~/projects/prelude/main'].
 :- initialization(main, main).
 
-check_lpr(NAME) :- 
+check('dpr-trim', NAME) :- 
   format('Checking problem = ~w\n', [NAME]),
-  format_shell('cake_lpr ./cnfs/~w.cnf ./lprs/~w.lpr', [NAME, NAME], 0).
+  format_shell('cake_lpr ./cnfs/~w.cnf ./dpr-trim/lprs/~w.lpr', [NAME, NAME], 0).
 
-check_lrat(NAME) :- 
+check('d-frat', NAME) :- 
   format('Checking problem = ~w\n', [NAME]),
-  format_shell('cake_lpr ./cnfs/~w.cnf ./lrats/~w.lrat', [NAME, NAME], 0).
+  format_shell('cake_lpr ./cnfs/~w.cnf ./d-frat/lrats/~w.lrat', [NAME, NAME], 0).
 
-main([lrat]) :-
-  findall(NAME, name(NAME), NAMES), 
-  fa_elem_cut(check_lrat, NAMES).
+check('f-frat', NAME) :- 
+  format('Checking problem = ~w\n', [NAME]),
+  format_shell('cake_lpr ./cnfs/~w.cnf ./f-frat/lrats/~w.lrat', [NAME, NAME], 0).
 
-main([lpr]) :-
+main([PATH]) :-
+  format("Checking elab path = ~w\n\n", [PATH]),
   findall(NAME, name(NAME), NAMES), 
-  fa_elem_cut(check_lpr, NAMES).
+  fa_elem_cut(check(PATH), NAMES).
 
 
