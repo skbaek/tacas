@@ -1,8 +1,16 @@
 frats/
 lrats/
+
+pr/pr2drat/pd/lrats/
+pr/pr2drat/pf/lrats/
+pr/pr2drat/fp/frats/
+pr/pr2drat/fp/temps/
+pr/pr2drat/fp/lrats/
+
 pr/proof-pr/dpr-trim/lprs/
 pr/proof-pr/d-frat/lrats/
 pr/proof-pr/f-frat/frats/
 pr/proof-pr/f-frat/temps/
 pr/proof-pr/f-frat/lrats/
+
 foo.pl

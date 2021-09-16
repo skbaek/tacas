@@ -1,12 +1,11 @@
 #!/usr/bin/env swipl
 
-:- [names].
-% :- ['conv-times'].
-% :- ['elab-times'].
-% :- ['dpr-trim-times'].
+:- ['../names'].
 :- ['conv-mems'].
+:- ['conv-times'].
 :- ['elab-mems'].
-:- ['dpr-trim-mems'].
+:- ['elab-times'].
+
 :- initialization(main, main).
 
 name_time(NAME, TIME) :- 
@@ -23,20 +22,11 @@ bar(NUM, [TIME | TIMES]) :-
   format("(~w, ~w) ", [TIME, NUM]), 
   SUC is NUM + 1, 
   bar(SUC, TIMES).
-
 bar(_, []).
 
 main :-
-  % write("CONV:\n"), 
-  % findall(X, conv_mem(_, X), XS), 
-  % write(XS),
-  % write("ELAB:\n"), 
-  % findall(Y, elab_mem(_, Y), YS), 
-  % write(YS),
-
-  % findall(NAME, name(NAME), NAMES), 
-  % maplist(name_mem, NAMES, MEMS),
-  findall(MEM, dpr_trim_mem(_, MEM), MEMS),
-  sort(0, @=<, MEMS, SORTED),
+  findall(NAME, name(NAME), NAMES), 
+  maplist(name_time, NAMES, TIMES),
+  sort(0, @=<, TIMES, SORTED),
   bar(1, SORTED).
 
