@@ -1,7 +1,8 @@
 #!/usr/bin/env swipl
 
 :- initialization(main, main).
-:- ['../basic', names].
+:- ['../../basic'].
+:- [names].
 
 read_time(String, Time) :- 
   string_concat("\tUser time (seconds): ", TimeString, String),
@@ -17,7 +18,7 @@ test_dpr_trim(NAME) :-
   format("Processing problem = ~w\n", [NAME]),
   format(string(CNF), "./cnfs/~w.cnf", [NAME]),
   format(string(PR), "./prs/~w.pr", [NAME]),
-  format(string(LPR), "./dpr-lprs/~w.lpr", [NAME]), !,
+  format(string(LPR), "./lprs/~w.lpr", [NAME]), !,
   format(string(LPR_TEMP), "./~w.lpr", [NAME]), !,
 
   write("Elaborating...\n"),
@@ -30,9 +31,9 @@ test_dpr_trim(NAME) :-
   read_item(read_mem, "measure", MEM),
   size_file(LPR_TEMP, LPR_SIZE), !, 
 
-  add_entry('dpr-trim-times.pl',     dpr_trim_time(NAME, TIME)),
-  add_entry('dpr-trim-mems.pl',      dpr_trim_mem(NAME, MEM)),
-  add_entry('dpr-trim-lpr-sizes.pl', dpr_trim_lpr_size(NAME, LPR_SIZE)), !,
+  add_entry('dpr-trim-times.pl', dpr_trim_time(NAME, TIME)),
+  add_entry('dpr-trim-mems.pl',  dpr_trim_mem(NAME, MEM)),
+  add_entry('lpr-sizes.pl', lpr_size(NAME, LPR_SIZE)), !,
 
   delete_file("measure"),
   delete_file("stdout.txt"),
@@ -43,7 +44,7 @@ test_dpr_trim(NAME) :-
 test_frat_to_lrat(_) :- 
   add_entry('dpr-trim-times.pl',     failed),
   add_entry('dpr-trim-mems.pl',      failed),
-  add_entry('dpr-trim-lpr-sizes.pl', failed),
+  add_entry('lpr-sizes.pl', failed),
   true.
 
 result_exists(NUM) :- frat_to_lrat_time(NUM, _), !.

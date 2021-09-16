@@ -1,7 +1,8 @@
 #!/usr/bin/env swipl
 
-:- ['../basic', names].
 :- initialization(main, main).
+:- ['../../basic'].
+:- [names].
 
 read_time(String, Time) :- 
   string_concat("\tUser time (seconds): ", TimeString, String),
@@ -13,76 +14,44 @@ read_mem(String, PeakMem) :-
 
 s_to_ms(S, MS) :- MS is round(S * 1000).
 
-test_frat_rs(NAME) :- 
-
+test_frat_drat_trim(NAME) :- 
   format("Processing problem = ~w\n", [NAME]),
   format(string(CNF), "./cnfs/~w.cnf", [NAME]),
   format(string(PR), "./prs/~w.pr", [NAME]),
+  format(string(LRAT), "./lrats/~w.lrat", [NAME]), !,
+  format(string(LRAT_TEMP), "./~w.lrat", [NAME]), !,
 
-  format(string(FRAT), "./~w.frat", [NAME]), !,
-  format(string(TEMP), "~w.temp", [FRAT]),
-  format(string(LRAT), "./~w.lrat", [NAME]), !,
-  format(string(LRAT_STORE), "./lrats/~w.lrat", [NAME]), !,
-  format(string(FRAT_STORE), "./frats/~w.frat", [NAME]), !,
+  write("Elaborating...\n"),
+  format_shell("time -v frat-rs drat-trim -F ~w ~w -L ~w 1>> stdout.txt 2> measure", [CNF, PR, LRAT_TEMP], 0), !,
 
-  write("Converting PR to FRAT...\n"),
-  format_shell("time -v frat-rs drat-trim -F ~w ~w ~w 1>> stdout.txt 2> measure", [CNF, PR, FRAT], 0), !,
+  % LRAT_TEMP, stdout.txt, measure
 
-  % FRAT, stdout.txt, measure
+  read_item(read_time, "measure", TIME_SEC),
+  s_to_ms(TIME_SEC, TIME),
+  read_item(read_mem, "measure", MEM),
+  size_file(LRAT_TEMP, LRAT_SIZE), !, 
 
-  read_item(read_time, "measure", CONV_SEC),
-  s_to_ms(CONV_SEC, CONV_TIME),
-  read_item(read_mem, "measure", CONV_MEM),
-  size_file(FRAT, FRAT_SIZE), !, 
+  add_entry('frat-rs-times.pl', frat_rs_time(NAME, TIME)),
+  add_entry('frat-rs-mems.pl',  frat_rs_mem(NAME, MEM)),
+  add_entry('lrat-sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
+
   delete_file("measure"),
   delete_file("stdout.txt"),
-
-  % FRAT
-
-  write("Elaborating FRAT to LRAT...\n"),
-
-  format_shell("time -v frat-rs elab ~w ~w ~w 1>> stdout.txt 2> measure", [CNF, FRAT, LRAT], 0), !,
-
-  read_item(read_time, "measure", ELAB_SEC),
-  s_to_ms(ELAB_SEC, ELAB_TIME),
-  read_item(read_mem, "measure", ELAB_MEM),
-  size_file(TEMP, TEMP_SIZE), !, 
-  size_file(LRAT, LRAT_SIZE), !, 
-  delete_file("measure"),
-  delete_file("stdout.txt"),
-
-  add_entry('conv_times.pl', conv_time(NAME, CONV_TIME)),
-  add_entry('conv_mems.pl',  conv_mem(NAME, CONV_MEM)),
-  add_entry('frat_sizes.pl', frat_size(NAME, FRAT_SIZE)), !,
-
-  add_entry('elab_times.pl', elab_time(NAME, ELAB_TIME)),
-  add_entry('elab_mems.pl',  elab_mem(NAME, ELAB_MEM)),
-  add_entry('temp_sizes.pl', temp_size(NAME, TEMP_SIZE)),
-  add_entry('lrat_sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
-
-  format_shell("mv ~w ~w", [LRAT, LRAT_STORE], 0), !,
-  format_shell("mv ~w ~w", [FRAT, FRAT_STORE], 0), !,
-  delete_file(TEMP),
+  format_shell("mv ~w ~w", [LRAT_TEMP, LRAT], 0), !,
 
   true.
   
-test_frat_rs(NAME) :- 
-  add_entry('conv-times.pl', failed(NAME)),
-  add_entry('conv-mems.pl',  failed(NAME)),
-  add_entry('elab-times.pl', failed(NAME)),
-  add_entry('elab-mems.pl',  failed(NAME)),
-  add_entry('frat-sizes.pl',  failed(NAME)),
-  add_entry('temp-sizes.pl',  failed(NAME)),
-  add_entry('lrat-sizes.pl',  failed(NAME)),
-  true.
-
-% main(ARGS) :-
-%   select_nums(result_exists, ARGS, NUMS),
-%   write_list(NUMS), !,
-%   cmap(test_frat_to_lrat, NUMS).
-
+test_frat_to_lrat(_) :- 
+  % add_entry('frat-rs-times.pl',     failed),
+  % add_entry('frat-rs-mems.pl',      failed),
+  % add_entry('lrat-sizes.pl', failed),
+  % true.
+  false.
 
 main :- 
   findall(NAME, name(NAME), NAMES),
-  cmap(test_frat_rs, NAMES),
+  cmap(test_frat_drat_trim, NAMES),
   true.
+
+  
+  
