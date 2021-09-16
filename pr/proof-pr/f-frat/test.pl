@@ -1,6 +1,7 @@
 #!/usr/bin/env swipl
 
-:- ['../../basic', names].
+:- ['../../../basic'].
+:- ['../names'].
 :- initialization(main, main).
 
 read_time(String, Time) :- 
@@ -16,14 +17,15 @@ s_to_ms(S, MS) :- MS is round(S * 1000).
 test_frat_rs(NAME) :- 
 
   format("Processing problem = ~w\n", [NAME]),
-  format(string(CNF), "./cnfs/~w.cnf", [NAME]),
-  format(string(PR), "./prs/~w.pr", [NAME]),
+  format(string(CNF), "../cnfs/~w.cnf", [NAME]),
+  format(string(PR), "../prs/~w.pr", [NAME]),
 
   format(string(FRAT), "./~w.frat", [NAME]), !,
   format(string(TEMP), "~w.temp", [FRAT]),
   format(string(LRAT), "./~w.lrat", [NAME]), !,
-  format(string(LRAT_STORE), "./lrats/~w.lrat", [NAME]), !,
   format(string(FRAT_STORE), "./frats/~w.frat", [NAME]), !,
+  format(string(TEMP_STORE), "./temps/~w.frat", [NAME]), !,
+  format(string(LRAT_STORE), "./lrats/~w.lrat", [NAME]), !,
 
   write("Converting PR to FRAT...\n"),
   format_shell("time -v frat-rs from-drat ~w ~w ~w 1>> stdout.txt 2> measure", [CNF, PR, FRAT], 0), !,
@@ -53,16 +55,17 @@ test_frat_rs(NAME) :-
 
   add_entry('conv-times.pl', conv_time(NAME, CONV_TIME)),
   add_entry('conv-mems.pl',  conv_mem(NAME, CONV_MEM)),
-  add_entry('frat-sizes.pl', frat_size(NAME, FRAT_SIZE)), !,
 
   add_entry('elab-times.pl', elab_time(NAME, ELAB_TIME)),
   add_entry('elab-mems.pl',  elab_mem(NAME, ELAB_MEM)),
+
+  add_entry('frat-sizes.pl', frat_size(NAME, FRAT_SIZE)), !,
   add_entry('temp-sizes.pl', temp_size(NAME, TEMP_SIZE)),
   add_entry('lrat-sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
 
-  format_shell("mv ~w ~w", [LRAT, LRAT_STORE], 0), !,
   format_shell("mv ~w ~w", [FRAT, FRAT_STORE], 0), !,
-  delete_file(TEMP),
+  format_shell("mv ~w ~w", [TEMP, TEMP_STORE], 0), !,
+  format_shell("mv ~w ~w", [LRAT, LRAT_STORE], 0), !,
 
   true.
   

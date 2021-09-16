@@ -1,8 +1,8 @@
 #!/usr/bin/env swipl
 
 :- initialization(main, main).
-:- ['../../basic'].
-:- [names].
+:- ['../../../basic'].
+:- ['../names'].
 
 read_time(String, Time) :- 
   string_concat("\tUser time (seconds): ", TimeString, String),
@@ -16,8 +16,8 @@ s_to_ms(S, MS) :- MS is round(S * 1000).
 
 test_frat_drat_trim(NAME) :- 
   format("Processing problem = ~w\n", [NAME]),
-  format(string(CNF), "./cnfs/~w.cnf", [NAME]),
-  format(string(PR), "./prs/~w.pr", [NAME]),
+  format(string(CNF), "../cnfs/~w.cnf", [NAME]),
+  format(string(PR), "../prs/~w.pr", [NAME]),
   format(string(LRAT), "./lrats/~w.lrat", [NAME]), !,
   format(string(LRAT_TEMP), "./~w.lrat", [NAME]), !,
 
@@ -31,9 +31,9 @@ test_frat_drat_trim(NAME) :-
   read_item(read_mem, "measure", MEM),
   size_file(LRAT_TEMP, LRAT_SIZE), !, 
 
-  add_entry('frat-rs-times.pl', frat_rs_time(NAME, TIME)),
-  add_entry('frat-rs-mems.pl',  frat_rs_mem(NAME, MEM)),
-  add_entry('lrat-sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
+  add_entry('./times.pl', frat_rs_time(NAME, TIME)),
+  add_entry('./mems.pl',  frat_rs_mem(NAME, MEM)),
+  add_entry('./sizes.pl', lrat_size(NAME, LRAT_SIZE)), !,
 
   delete_file("measure"),
   delete_file("stdout.txt"),
