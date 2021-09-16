@@ -1,1 +1,20 @@
 
+dpr_trim_time("T5",40).
+dpr_trim_time("T7",30).
+dpr_trim_time("Urquhart-s5-b1.shuffled",80).
+dpr_trim_time("Urquhart-s5-b2.shuffled",70).
+dpr_trim_time("Urquhart-s5-b3.shuffled",80).
+dpr_trim_time("Urquhart-s5-b4.shuffled",90).
+dpr_trim_time("hole20",300).
+dpr_trim_time("hole30",2910).
+dpr_trim_time("hole40",18040).
+dpr_trim_time("hole50",70820).
+dpr_trim_time("mchess-10",40).
+dpr_trim_time("mchess-20",1350).
+dpr_trim_time("mchess-30",25780).
+dpr_trim_time("mchess-40",228950).
+dpr_trim_time("mchess-50",1327250).
+dpr_trim_time("tph8",180).
+dpr_trim_time("tph12",2100).
+dpr_trim_time("tph16",14450).
+dpr_trim_time("tph20",68850).

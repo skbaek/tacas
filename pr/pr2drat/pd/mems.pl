@@ -1,1 +1,20 @@
 
+dpr_trim_mem("T5",64264).
+dpr_trim_mem("T7",64264).
+dpr_trim_mem("Urquhart-s5-b1.shuffled",64396).
+dpr_trim_mem("Urquhart-s5-b2.shuffled",64276).
+dpr_trim_mem("Urquhart-s5-b3.shuffled",64324).
+dpr_trim_mem("Urquhart-s5-b4.shuffled",64348).
+dpr_trim_mem("hole20",64584).
+dpr_trim_mem("hole30",65348).
+dpr_trim_mem("hole40",66740).
+dpr_trim_mem("hole50",73836).
+dpr_trim_mem("mchess-10",64284).
+dpr_trim_mem("mchess-20",65088).
+dpr_trim_mem("mchess-30",67108).
+dpr_trim_mem("mchess-40",71740).
+dpr_trim_mem("mchess-50",117108).
+dpr_trim_mem("tph8",64464).
+dpr_trim_mem("tph12",65460).
+dpr_trim_mem("tph16",69104).
+dpr_trim_mem("tph20",109480).

@@ -1,1 +1,20 @@
 
+lrat_size("T5",1262).
+lrat_size("T7",1762).
+lrat_size("Urquhart-s5-b1.shuffled",102019).
+lrat_size("Urquhart-s5-b2.shuffled",108548).
+lrat_size("Urquhart-s5-b3.shuffled",159065).
+lrat_size("Urquhart-s5-b4.shuffled",128992).
+lrat_size("hole20",770214).
+lrat_size("hole30",3994355).
+lrat_size("hole40",13117027).
+lrat_size("hole50",32182417).
+lrat_size("mchess-10",71167).
+lrat_size("mchess-20",1841584).
+lrat_size("mchess-30",9503507).
+lrat_size("mchess-40",30528066).
+lrat_size("mchess-50",77268797).
+lrat_size("tph8",668097).
+lrat_size("tph12",5975197).
+lrat_size("tph16",26767806).
+lrat_size("tph20",90219476).
