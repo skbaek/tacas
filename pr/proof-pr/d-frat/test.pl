@@ -22,7 +22,7 @@ test_frat_drat_trim(NAME) :-
   format(string(LRAT_TEMP), "./~w.lrat", [NAME]), !,
 
   write("Elaborating...\n"),
-  format_shell("time -v frat-rs drat-trim -F ~w ~w -L ~w 1>> stdout.txt 2> measure", [CNF, PR, LRAT_TEMP], 0), !,
+  format_shell("time -v frat-rs drat-trim ~w ~w -L ~w 1>> stdout.txt 2> measure", [CNF, PR, LRAT_TEMP], 0), !,
 
   % LRAT_TEMP, stdout.txt, measure
 
