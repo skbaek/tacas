@@ -22,8 +22,8 @@ test_dpr_trim(NAME) :-
   format(string(LRAT), "./~w.lrat", [NAME]), !,
   format(string(DRAT), "./~w.drat", [NAME]), !,
   
-  format(string(DRAT_STORE), "./lrats/~w.lrat", [NAME]), !,
-  format(string(LRAT_STORE), "./drats/~w.drat", [NAME]), !,
+  format(string(LRAT_STORE), "./lrats/~w.lrat", [NAME]), !,
+  format(string(DRAT_STORE), "./drats/~w.drat", [NAME]), !,
 
   write("Converting to DRAT...\n"),
 
