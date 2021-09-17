@@ -1,1 +1,20 @@
 
+elab_mem("T5",2852).
+elab_mem("T7",2836).
+elab_mem("Urquhart-s5-b1.shuffled",3140).
+elab_mem("Urquhart-s5-b2.shuffled",3440).
+elab_mem("Urquhart-s5-b3.shuffled",3432).
+elab_mem("Urquhart-s5-b4.shuffled",3396).
+elab_mem("hole20",4460).
+elab_mem("hole30",7240).
+elab_mem("hole40",13916).
+elab_mem("hole50",21428).
+elab_mem("mchess-10",3208).
+elab_mem("mchess-20",4648).
+elab_mem("mchess-30",9152).
+elab_mem("mchess-40",16336).
+elab_mem("mchess-50",30584).
+elab_mem("tph8",4388).
+elab_mem("tph12",10232).
+elab_mem("tph16",25460).
+elab_mem("tph20",53628).

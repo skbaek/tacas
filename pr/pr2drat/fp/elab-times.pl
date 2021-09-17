@@ -1,1 +1,20 @@
 
+elab_time("T5",0).
+elab_time("T7",0).
+elab_time("Urquhart-s5-b1.shuffled",210).
+elab_time("Urquhart-s5-b2.shuffled",230).
+elab_time("Urquhart-s5-b3.shuffled",410).
+elab_time("Urquhart-s5-b4.shuffled",310).
+elab_time("hole20",2450).
+elab_time("hole30",41240).
+elab_time("hole40",302670).
+elab_time("hole50",1399380).
+elab_time("mchess-10",90).
+elab_time("mchess-20",9500).
+elab_time("mchess-30",173090).
+elab_time("mchess-40",1327600).
+elab_time("mchess-50",6779880).
+elab_time("tph8",2350).
+elab_time("tph12",84110).
+elab_time("tph16",1087220).
+elab_time("tph20",9333580).
