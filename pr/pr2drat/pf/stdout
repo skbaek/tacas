@@ -1,0 +1,6 @@
+c parsing input formula with 820 variables and 213241 clauses
+c finished parsing, read 623314426 bytes from proof file
+c detected empty clause; start verification via backward checking
+s TIMEOUT
+s NOT VERIFIED
+c verification time: 40023.396 seconds

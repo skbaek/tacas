@@ -1,1 +1,19 @@
 
+conv_time("T5",0).
+conv_time("T7",0).
+conv_time("Urquhart-s5-b1.shuffled",100).
+conv_time("Urquhart-s5-b2.shuffled",110).
+conv_time("Urquhart-s5-b3.shuffled",210).
+conv_time("Urquhart-s5-b4.shuffled",150).
+conv_time("hole20",290).
+conv_time("hole30",2750).
+conv_time("hole40",14350).
+conv_time("hole50",53180).
+conv_time("mchess-10",20).
+conv_time("mchess-20",880).
+conv_time("mchess-30",9300).
+conv_time("mchess-40",56650).
+conv_time("mchess-50",237410).
+conv_time("tph8",160).
+conv_time("tph12",1810).
+conv_time("tph16",11310).
