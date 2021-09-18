@@ -26,7 +26,8 @@ bar(_, []).
 
 main :-
   findall(NAME, name(NAME), NAMES), 
-  maplist(name_time, NAMES, TIMES),
-  sort(0, @=<, TIMES, SORTED),
+  maplist(name_mem, NAMES, MEMS),
+  % findall(TIME, elab_time(_, TIME), TIMES),
+  sort(0, @=<, MEMS, SORTED),
   bar(1, SORTED).
 

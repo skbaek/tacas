@@ -1,7 +1,11 @@
 #!/usr/bin/env swipl
 
 :- ['../names'].
-:- [mems, times, sizes].
+:- ['conv-mems'].
+:- ['conv-times'].
+:- ['elab-mems'].
+:- ['elab-times'].
+
 :- initialization(main, main).
 
 name_time(NAME, TIME) :- 
@@ -21,7 +25,9 @@ bar(NUM, [TIME | TIMES]) :-
 bar(_, []).
 
 main :-
-  findall(TIME, dpr_trim_time(_, TIME), TIMES), 
-  sort(0, @=<, TIMES, SORTED),
+  findall(NAME, name(NAME), NAMES), 
+  maplist(name_mem, NAMES, MEMS),
+  % findall(TIME, elab_time(_, TIME), TIMES),
+  sort(0, @=<, MEMS, SORTED),
   bar(1, SORTED).
 

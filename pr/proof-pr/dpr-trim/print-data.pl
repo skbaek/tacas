@@ -22,6 +22,10 @@ bar(_, []).
 
 main :-
   findall(TIME, dpr_trim_time(_, TIME), TIMES), 
-  sort(0, @=<, TIMES, SORTED),
-  bar(1, SORTED).
+  % sort(0, @=<, TIMES, SORTED),
+  % bar(1, SORTED).
+  sum_list(TIMES, TOTAL),
+  write(TOTAL),
+  true.
+  
 
